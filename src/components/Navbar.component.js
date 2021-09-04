@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,9 +35,9 @@ function Navbar() {
             </div>
             <div className={classes.navUl}>
                 <ul>
-                    <li>Product</li>
+                    <li><Link to="/" >Product</Link></li>
                     <li>Cart</li>
-                    <li>Payment</li>
+                    <li><Link to="/payment" >Payment</Link></li>
                 </ul>
             </div>
         </div>

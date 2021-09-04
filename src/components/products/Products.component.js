@@ -1,6 +1,7 @@
-import { Grid, makeStyles } from '@material-ui/core'
-import { BorderBottom } from '@material-ui/icons';
-import React from 'react'
+import { FormControl, Grid, InputLabel, makeStyles, MenuItem, Select } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { productsContext } from '../../context/product.context';
+import useWindowDimensions from '../../hook/WindowDimensions.hook';
 import Card from './card/Card.component';
 
 const useStyles = makeStyles(theme => ({
@@ -13,51 +14,83 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'space-between',
         borderBottom: '1px solid black',
-
-        '& select': {
-            width: '10rem',
-            padding: '.5rem',
-        },
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
     },
     productsContainer: {
         marginTop: '1rem',
     },
 }))
 
-function Products() {
+function Products(props) {
     const classes = useStyles();
+    const { width } = useWindowDimensions();
+    var products = React.useContext(productsContext);
+
+    const [selectedCategory, setSelectedCategory] = useState("women's clothing")
+    const [spacing1, setSpacing1] = useState(4)
+    const [sortedProduct, setSortedProduct] = useState([])
+
+    let productsDisplayContainer;
+    if (sortedProduct === null) {
+        productsDisplayContainer = (<h5>Loading...</h5>)
+    } else {
+        if (sortedProduct.length > 0) {
+            productsDisplayContainer = sortedProduct.map(product => (
+                <Grid item xs={spacing1}>
+                    <Card product={product} />
+                </Grid>
+            ))
+        } else {
+            productsDisplayContainer = (<h5>No product Foud</h5>)
+        }
+    }
+
+    useEffect(() => {
+        if (selectedCategory) {
+            let srt = products.filter(item => item.category === selectedCategory)
+            setSortedProduct(srt)
+        } else {
+            setSortedProduct(products)
+        }
+    }, [selectedCategory, products])
+
+    useEffect(() => {
+        if (width > 1024) {
+            setSpacing1(3)
+        } else if (width > 768) {
+            setSpacing1(4)
+        } else if (width > 420) {
+            setSpacing1(6)
+        } else {
+            setSpacing1(12)
+        }
+    }, [width])
 
     return (
         <div className={classes.root}>
             <div className={classes.topNav}>
                 <div><h3>Products</h3></div>
-                <div>
-                    <select name="" id="">
-                        <option value="men">Men</option>
-                        <option value="women">Women</option>
-                    </select>
-                </div>
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Categories</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={selectedCategory}
+                        onChange={e => setSelectedCategory(e.target.value)}
+                    >
+                        <MenuItem value={"men's clothing"}>men's clothing</MenuItem>
+                        <MenuItem value={"women's clothing"}>women's clothing</MenuItem>
+                        <MenuItem value={"jewelery"}>jewelery</MenuItem>
+                        <MenuItem value={"electronics"}>electronics</MenuItem>
+                    </Select>
+                </FormControl>
             </div>
             <div className={classes.productsContainer}>
                 <Grid container spacing={3}>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Card />
-                    </Grid>
+                    {productsDisplayContainer}
                 </Grid>
             </div>
         </div>

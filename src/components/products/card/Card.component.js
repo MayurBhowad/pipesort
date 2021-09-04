@@ -7,25 +7,56 @@ const useStyles = makeStyles(theme => ({
         border: '1px solid black',
         padding: '1rem',
 
+        '& h2': {
+            display: "-webkit-box",
+            boxOrient: "vertical",
+            lineClamp: 2,
+            wordBreak: "break-all",
+            overflow: "hidden"
+        },
+
         '& img': {
             width: '100%',
+            height: '200px',
+            objectFit: 'scale-down',
+        },
+
+        '& p': {
+            display: "-webkit-box",
+            boxOrient: "vertical",
+            lineClamp: 3,
+            wordBreak: "break-all",
+            overflow: "hidden"
         }
+    },
+    priceContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+
+        '& h2': {
+            margin: '0',
+        },
+        '& h4': {
+            margin: '0',
+        },
     }
 }))
 
-function Card() {
+function Card(props) {
     const classes = useStyles()
+    const { product } = props;
 
     return (
         // <div>
-        <div className={classes.card}>
-            <h2>Pierced Owl Rose Gold Plated Stainless Steel Double</h2>
-            <img src="https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg" alt="" />
+        <div className={classes.card} key={product.id}>
+            <h2>{product.title}</h2>
+            <img src={product.image} alt="" />
             <div className={classes.priceContainer}>
-                <h2>10.99</h2>
-                <h4>1.9</h4>
+                <h2>${product.price}</h2>
+                <h4>Rating: {product.rating.rate}</h4>
             </div>
-            <p>Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel</p>
+            <p>{product.description}</p>
         </div>
         // </div>
     )
