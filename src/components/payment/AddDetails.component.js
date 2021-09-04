@@ -7,6 +7,19 @@ const useStyles = makeStyles(theme => ({
     root: {
         margin: '0 2rem',
     },
+    container: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    personalDetails: {
+        flex: 1,
+    },
+    paymentDetails: {
+        flex: 1,
+    },
+    gap: {
+        width: '1rem',
+    },
     submitBtn: {
         margin: '2rem 0',
         '& button': {
@@ -34,11 +47,14 @@ function AddDetails() {
 
     return (
         <div className={classes.root}>
-            <div className={classes.personalDetails} >
-                <PersonalDetails />
-            </div>
-            <div className={classes.paymentDetails} >
-                <PaymentDetails />
+            <div className={classes.container}>
+                <div className={classes.personalDetails} >
+                    <PersonalDetails />
+                </div>
+                <div className={classes.gap}></div>
+                <div className={classes.paymentDetails} >
+                    <PaymentDetails />
+                </div>
             </div>
             <div className={classes.submitBtn} >
                 <button>Submit</button>
