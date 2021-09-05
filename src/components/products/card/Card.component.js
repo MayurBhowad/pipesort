@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
 
     card: {
         border: '1px solid black',
+        borderRadius: '3px',
         padding: '1rem',
 
         '& h2': {

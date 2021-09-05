@@ -8,6 +8,11 @@ const useStyles = makeStyles(theme => ({
     root: {
         marginTop: '2rem',
         margin: '0 4rem',
+
+        [theme.breakpoints.down(400)]: {
+            marginTop: '2rem',
+            margin: '0 1rem',
+        },
     },
     topNav: {
         display: 'flex',
