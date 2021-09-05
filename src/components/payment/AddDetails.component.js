@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
         '& button': {
             width: '100%',
             padding: '.5rem',
+            color: '#ffffff',
 
             cursor: 'pointer',
 
@@ -45,19 +46,35 @@ const useStyles = makeStyles(theme => ({
 function AddDetails() {
     const classes = useStyles()
 
+    const [fullName, setFullName] = useState('')
+    const [email, setEmail] = useState('')
+    const [address, setAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [pincode, setPincode] = useState('')
+
+    const [cardNumber, setCardNumber] = useState('')
+    const [cardName, setCardName] = useState('')
+    const [expDate, setExpDate] = useState('')
+    const [cvv, setCvv] = useState('')
+
+    const onsubmit = () => {
+        alert(`input values: ${fullName}, ${email}, ${address}, ${address}, ${city}, ${state}, ${pincode}, ${cardNumber}, ${cardName}, ${expDate}, ${cvv}`)
+    }
+
     return (
         <div className={classes.root}>
             <div className={classes.container}>
                 <div className={classes.personalDetails} >
-                    <PersonalDetails />
+                    <PersonalDetails setFullName={setFullName} setEmail={setEmail} setAddress={setAddress} setCity={setCity} setState={setState} setPincode={setPincode} />
                 </div>
                 <div className={classes.gap}></div>
                 <div className={classes.paymentDetails} >
-                    <PaymentDetails />
+                    <PaymentDetails setCardNumbe={setCardNumber} setCardName={setCardName} setExpDate={setExpDate} setCvv={setCvv} />
                 </div>
             </div>
             <div className={classes.submitBtn} >
-                <button>Submit</button>
+                <button onClick={onsubmit}>Submit</button>
             </div>
         </div>
     )

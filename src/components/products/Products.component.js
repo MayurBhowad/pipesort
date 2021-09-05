@@ -29,17 +29,18 @@ function Products(props) {
     const { width } = useWindowDimensions();
     var products = React.useContext(productsContext);
 
+    const [loading, setLoading] = useState(true)
     const [selectedCategory, setSelectedCategory] = useState("women's clothing")
     const [spacing1, setSpacing1] = useState(4)
     const [sortedProduct, setSortedProduct] = useState([])
 
     let productsDisplayContainer;
-    if (sortedProduct === null) {
+    if (sortedProduct === null || loading) {
         productsDisplayContainer = (<h5>Loading...</h5>)
     } else {
         if (sortedProduct.length > 0) {
             productsDisplayContainer = sortedProduct.map(product => (
-                <Grid item xs={spacing1}>
+                <Grid item xs={spacing1} key={product.id}>
                     <Card product={product} />
                 </Grid>
             ))
@@ -55,6 +56,8 @@ function Products(props) {
         } else {
             setSortedProduct(products)
         }
+
+        products.length > 0 ? setLoading(false) : setLoading(true)
     }, [selectedCategory, products])
 
     useEffect(() => {
