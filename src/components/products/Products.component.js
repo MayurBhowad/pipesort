@@ -35,7 +35,7 @@ function Products(props) {
     var products = React.useContext(productsContext);
 
     const [loading, setLoading] = useState(true)
-    const [selectedCategory, setSelectedCategory] = useState("women's clothing")
+    const [selectedCategory, setSelectedCategory] = useState()
     const [spacing1, setSpacing1] = useState(4)
     const [sortedProduct, setSortedProduct] = useState([])
 
