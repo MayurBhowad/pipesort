@@ -5,17 +5,43 @@ import PersonalDetails from './details/PersonalDetails.component'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: '0 2rem',
+        display: 'flex',
+        justifyContent: 'center',
+
         [theme.breakpoints.down(400)]: {
             margin: '0 1rem',
         },
     },
     container: {
+        width: '400px',
         display: 'flex',
         justifyContent: 'space-between',
+        flexDirection: 'column',
 
         [theme.breakpoints.down(400)]: {
             flexDirection: 'column',
+        },
+    },
+    stepContainer: {
+
+        '& h4': {
+            margin: '.5rem 0',
+        },
+    },
+    stepListItem: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+
+
+
+        '& h2': {
+            margin: '.5rem 0',
+            fontSize: '20px',
+        },
+
+        '& p': {
+            fontSize: '20px'
         },
     },
     personalDetails: {
@@ -48,6 +74,9 @@ const useStyles = makeStyles(theme => ({
             }
         },
     },
+    active: {
+        color: '#0268FF',
+    },
 }))
 
 function AddDetails() {
@@ -71,17 +100,29 @@ function AddDetails() {
 
     return (
         <div className={classes.root}>
+
+
             <div className={classes.container}>
+                <div className={classes.stepContainer}>
+                    <h4>Steps</h4>
+                    <div className={classes.stepListItem}>
+                        <p className={classes.active}>----</p>
+                        <h2 className={classes.active}>billing address</h2>
+                        <p >----</p>
+                        <h2 >payment details</h2>
+                        <p>----</p>
+                    </div>
+                </div>
                 <div className={classes.personalDetails} >
                     <PersonalDetails setFullName={setFullName} setEmail={setEmail} setAddress={setAddress} setCity={setCity} setState={setState} setPincode={setPincode} />
                 </div>
-                <div className={classes.gap}></div>
+                {/* <div className={classes.gap}></div>
                 <div className={classes.paymentDetails} >
                     <PaymentDetails setCardNumbe={setCardNumber} setCardName={setCardName} setExpDate={setExpDate} setCvv={setCvv} />
+                </div> */}
+                <div className={classes.submitBtn} >
+                    <button onClick={onsubmit}>Next</button>
                 </div>
-            </div>
-            <div className={classes.submitBtn} >
-                <button onClick={onsubmit}>Submit</button>
             </div>
         </div>
     )
