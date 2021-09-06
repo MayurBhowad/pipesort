@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { productsContext } from '../context/product.context'
+import ProductListEB from '../errorBoundries/ProductList.EB'
 import Products from './products/Products.component'
 
 function Home() {
@@ -21,9 +22,11 @@ function Home() {
     return (
         <productsContext.Provider value={products}>
             <div>
-                <Products />
+                <ProductListEB>
+                    <Products />
+                </ProductListEB>
             </div>
-        </productsContext.Provider>
+        </productsContext.Provider >
     )
 }
 

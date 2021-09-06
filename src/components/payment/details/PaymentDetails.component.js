@@ -23,6 +23,27 @@ const useStyles = makeStyles(theme => ({
             color: '#778891'
         },
     },
+    submitBtn: {
+        margin: '2rem 0',
+        '& button': {
+            width: '100%',
+            padding: '.5rem',
+            color: '#ffffff',
+
+            cursor: 'pointer',
+
+            border: 'none',
+            borderRadius: '2px',
+
+            backgroundColor: '#0268FF',
+
+            transition: 'all .5s',
+
+            '&:hover': {
+                backgroundColor: '#014CE6',
+            }
+        },
+    },
 }))
 
 function PaymentDetails(props) {
@@ -67,6 +88,11 @@ function PaymentDetails(props) {
                 </Grid>
 
             </Grid>
+
+            <div className={classes.submitBtn} >
+                <button onClick={onsubmit}>Submit</button>
+            </div>
+
 
         </div>
     )
