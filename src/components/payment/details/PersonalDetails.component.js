@@ -18,6 +18,27 @@ const useStyles = makeStyles(theme => ({
             outline: 'none',
         },
     },
+    submitBtn: {
+        margin: '2rem 0',
+        '& button': {
+            width: '100%',
+            padding: '.5rem',
+            color: '#ffffff',
+
+            cursor: 'pointer',
+
+            border: 'none',
+            borderRadius: '2px',
+
+            backgroundColor: '#0268FF',
+
+            transition: 'all .5s',
+
+            '&:hover': {
+                backgroundColor: '#014CE6',
+            }
+        },
+    },
 }))
 
 function PersonalDetails(props) {
@@ -25,7 +46,11 @@ function PersonalDetails(props) {
     const [spacing1, setSpacing1] = useState(12)
     const [spacing2, setSpacing2] = useState(12)
     const { width } = useWindowDimensions()
-    const { setFullName, setEmail, setAddress, setCity, setState, setPincode } = props;
+    const { setIsForm1Submited, setFullName, setEmail, setAddress, setCity, setState, setPincode } = props;
+
+    const onsubmit = () => {
+        setIsForm1Submited(true)
+    }
 
     useEffect(() => {
         if (width > 768) {
@@ -69,6 +94,9 @@ function PersonalDetails(props) {
                     <input type="text" placeholder="123 456" onChange={e => setPincode(e.target.value)} />
                 </Grid>
             </Grid>
+            <div className={classes.submitBtn} >
+                <button onClick={onsubmit}>Next</button>
+            </div>
 
         </div>
     )

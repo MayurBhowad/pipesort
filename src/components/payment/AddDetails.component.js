@@ -38,11 +38,21 @@ const useStyles = makeStyles(theme => ({
         '& h2': {
             margin: '.5rem 0',
             fontSize: '20px',
+
+            [theme.breakpoints.down(400)]: {
+                fontSize: '13px',
+                cursor: 'pointer',
+            }
         },
 
         '& p': {
-            fontSize: '20px'
+            fontSize: '20px',
+
+            [theme.breakpoints.down(400)]: {
+                fontSize: '13px',
+            }
         },
+
     },
     personalDetails: {
         flex: 1,
@@ -94,6 +104,9 @@ function AddDetails() {
     const [expDate, setExpDate] = useState('')
     const [cvv, setCvv] = useState('')
 
+    const [isForm1Submited, setIsForm1Submited] = useState(false);
+    const [isForm2Submited, setIsForm2Submited] = useState(false);
+
     const onsubmit = () => {
         alert(`input values: ${fullName}, ${email}, ${address}, ${address}, ${city}, ${state}, ${pincode}, ${cardNumber}, ${cardName}, ${expDate}, ${cvv}`)
     }
@@ -107,22 +120,26 @@ function AddDetails() {
                     <h4>Steps</h4>
                     <div className={classes.stepListItem}>
                         <p className={classes.active}>----</p>
-                        <h2 className={classes.active}>billing address</h2>
-                        <p >----</p>
-                        <h2 >payment details</h2>
-                        <p>----</p>
+                        <h2 className={classes.active} onClick={e => setIsForm1Submited(false)}>billing address</h2>
+                        <p className={isForm1Submited ? classes.active : null}>----</p>
+                        <h2 className={isForm1Submited ? classes.active : null} onClick={e => setIsForm1Submited(false)}>payment details</h2>
+                        <p className={isForm1Submited ? classes.active : null}>----</p>
                     </div>
                 </div>
-                <div className={classes.personalDetails} >
-                    <PersonalDetails setFullName={setFullName} setEmail={setEmail} setAddress={setAddress} setCity={setCity} setState={setState} setPincode={setPincode} />
-                </div>
-                {/* <div className={classes.gap}></div>
-                <div className={classes.paymentDetails} >
-                    <PaymentDetails setCardNumbe={setCardNumber} setCardName={setCardName} setExpDate={setExpDate} setCvv={setCvv} />
-                </div> */}
-                <div className={classes.submitBtn} >
+                {!isForm1Submited &&
+                    <div className={classes.personalDetails} >
+                        <PersonalDetails setIsForm1Submited={setIsForm1Submited} setFullName={setFullName} setEmail={setEmail} setAddress={setAddress} setCity={setCity} setState={setState} setPincode={setPincode} />
+                    </div>
+                }
+                {/* <div className={classes.gap}></div> */}
+                {(isForm1Submited && !isForm2Submited) &&
+                    <div className={classes.paymentDetails} >
+                        <PaymentDetails setCardNumbe={setCardNumber} setCardName={setCardName} setExpDate={setExpDate} setCvv={setCvv} />
+                    </div>
+                }
+                {/* <div className={classes.submitBtn} >
                     <button onClick={onsubmit}>Next</button>
-                </div>
+                </div> */}
             </div>
         </div>
     )
