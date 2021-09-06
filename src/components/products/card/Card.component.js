@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
 
     card: {
         border: '1px solid black',
+        borderRadius: '3px',
         padding: '1rem',
 
         '& h2': {
@@ -53,7 +54,7 @@ function Card(props) {
             <h2>{product.title}</h2>
             <img src={product.image} alt="" />
             <div className={classes.priceContainer}>
-                <h2>${product.price}</h2>
+                <h2>Rupee{product.price}</h2>
                 <h4>Rating: {product.rating.rate}</h4>
             </div>
             <p>{product.description}</p>

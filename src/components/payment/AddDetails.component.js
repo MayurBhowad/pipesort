@@ -6,10 +6,17 @@ import PersonalDetails from './details/PersonalDetails.component'
 const useStyles = makeStyles(theme => ({
     root: {
         margin: '0 2rem',
+        [theme.breakpoints.down(400)]: {
+            margin: '0 1rem',
+        },
     },
     container: {
         display: 'flex',
         justifyContent: 'space-between',
+
+        [theme.breakpoints.down(400)]: {
+            flexDirection: 'column',
+        },
     },
     personalDetails: {
         flex: 1,
