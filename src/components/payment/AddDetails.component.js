@@ -38,10 +38,10 @@ const useStyles = makeStyles(theme => ({
         '& h2': {
             margin: '.5rem 0',
             fontSize: '20px',
+            cursor: 'pointer',
 
             [theme.breakpoints.down(400)]: {
                 fontSize: '13px',
-                cursor: 'pointer',
             }
         },
 
