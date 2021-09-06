@@ -113,8 +113,6 @@ function AddDetails() {
 
     return (
         <div className={classes.root}>
-
-
             <div className={classes.container}>
                 <div className={classes.stepContainer}>
                     <h4>Steps</h4>
